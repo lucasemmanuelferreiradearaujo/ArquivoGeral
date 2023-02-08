@@ -31,43 +31,14 @@ cursor.execute(table_query)
 
 # Definição da GUI
 
-questions = [    'LOCAL DE GUARDA:',    'N° DE PRATELEIRA:',    'N° DE CAIXA:',    'N° DE DOSSIÊ:',    'N° DE REGISTRO:',    'Data de distribuição:',    'Número do volume:',    'Ano do arquivamento:',    'Proveniência:',    'Assunto:',    'Espécie:',    'Tipologia:',    'Requerente:',    'Observação:', 'Tipo do arquivo:', 'Data de cadastro:']
+questions = [    'Local de Guarda:',    'N° de Prateleira:',    'N° de Caixa:',    'N° de Dossiê:',    'N° de Registro:',    'Data de Distribuição:',    'N° do volume:',    'Ano do Arquivamento:',    'Proveniência:',    'Assunto:',    'Espécie:',    'Tipologia:',    'Requerente:',    'Observação:', 'Tipo do Arquivo:', 'Data de Cadastro:']
 input_types = [sg.InputText() for _ in range(len(questions) - 1)]
 
-layout = [[sg.Text(q), t] for q, t in zip(questions, input_types)] + [[sg.Submit(), sg.Cancel()]]
+layout = [[sg.Text(q,size=(15,1)), t] for q, t in zip(questions, input_types)] + [[sg.Submit(), sg.Cancel()]]
 
 # Criação da Janela de exibição
 window = sg.Window('Registro de documentos', layout)
 
-# Definição da página de login
-layout_login = [
-    [sg.Text('Nome de usuário'), sg.InputText()],
-    [sg.Text('Senha'), sg.InputText(password_char='*')],
-    [sg.Submit(), sg.Cancel()]
-]
-
-# Criação da janela de login
-window_login = sg.Window('Página de Login', layout_login)
-
-# Loop de leitura de eventos da página de login
-event, values = window_login.Read()
-
-# Verificação da autenticação
-if event == 'Submit':
-    username = values[0]
-    password = values[1]
-    # Verificar se o nome de usuário e senha estão corretos
-    if username == 'admin' and password == 'admin':
-        # Exibindo a janela de registro de documentos
-        pass
-    else:
-        sg.Popup('Nome de usuário ou senha inválidos')
-else:
-    sg.Popup('Login cancelado')
-    window.Close()
-
-# Fechando a janela de login
-window_login.Close()
 
 while True:
     event, values = window.Read()
@@ -84,5 +55,5 @@ while True:
     else:
          # Fechando a GUI
         break
-    # Fechando a conexão com o banco de dados
-    conn.close()
+# Fechando a conexão com o banco de dados
+conn.close()
